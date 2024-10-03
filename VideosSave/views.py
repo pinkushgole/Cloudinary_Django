@@ -20,36 +20,4 @@ class videos(APIView):
             messages.success(request, 'Video uploaded successfully!')
             return redirect('/videos')
         return redirect('/videos')
-    # def post (self,request):
-    #     title = request.POST.get('title')
-    #     description = request.POST.get('description', '')
-    #     video_file = request.FILES.get('video')
-
-    #     # Basic Validation
-    #     if not title:
-    #         messages.error(request, 'Title is required.')
-    #         return redirect('videos')
-        
-    #     if not video_file:
-    #         messages.error(request, 'No video file selected.')
-    #         return redirect('videos')
-    #     try:
-    #             # Manual validation
-    #         validate_video_file(video_file)
-    #         video = Video.objects.create(
-    #                 title=title,
-    #                 description=description,
-    #                 video=video_file
-    #             )
-    #         messages.success(request, 'Video uploaded successfully!')
-    #         return redirect('/videos')
-    #     except Exception as e:
-    #         messages.error(request, f'An error occurred: {str(e)}')
-    #         return redirect('/videos')
-    
-
-
-# class VideoData(APIView):
-#     
-    
    

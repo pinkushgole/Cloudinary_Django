@@ -135,10 +135,19 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+<<<<<<< HEAD
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+=======
+
+>>>>>>> 6bfb753177e84b84369d837fc1dc0fee13fbd42c
 cloudinary.config(
-    cloud_name="dawyddsxt",
-    api_key="243457444378268",
-    api_secret="Pod4GfGZdNH4FrxeRPLpHJTbtlg",
+    cloud_name="",
+    api_key="",
+    api_secret="",
 )
+<<<<<<< HEAD
 # DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+=======
+
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+>>>>>>> 6bfb753177e84b84369d837fc1dc0fee13fbd42c
