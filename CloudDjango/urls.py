@@ -9,7 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('addstudent/', api.StudentAdd.as_view()),
     path('videos/', vs.videos.as_view(),name="videos"),
-
+   path('track-time/', vs.track_time, name='track_time'),
 
 ]
 if settings.DEBUG:

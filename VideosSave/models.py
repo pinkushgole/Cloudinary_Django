@@ -15,3 +15,5 @@ class Video(models.Model):
     description = models.TextField(blank=True)
     video= CloudinaryField('video', resource_type='video')  
     uploaded_at = models.DateTimeField(auto_now_add=True)
+    duration = models.CharField(max_length=200,null=True)
+    # duration = models.DurationField()

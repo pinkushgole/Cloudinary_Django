@@ -32,25 +32,67 @@
 </div> 
 
 
+<div class="container-fluid m-5 p-6">
+
 <div class="video-list">
   <h3>Uploaded Videos</h3>
   <hr>
-      {% for video in videos %}
-          <div class="video-item">
-              <h5>Title :{{ video.title }}</h5>
-              <p>Description : {{ video.description }}</p>
-              <video width="30%" height="auto" controls>
-                  <source src="{{ video.video.url}}" type="video/mp4">
-                  Your browser does not support the video tag.
-              </video>
-        
-              <small>Uploaded at: {{ video.uploaded_at|date:"F j, Y, g:i a" }}</small>
-              <hr>
-          </div>
+  <div class="row">
+    {% for video in videos %}
+    <div class="card mb-6" style="width: 25rem;">
+      <video id="myVideo" width="100%" height="auto" controls>
+        <source src="{{ video.video.url}}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+      <div class="card-body">
+        <h5>Title :{{ video.title }}</h5>
+        <p>Description : {{ video.description }}</p>
+        <p>Uploaded at: {{ video.uploaded_at|date:"F j, Y, g:i a" }}</p>
+        <p>Duration: {{ video.duration  }} (H/M/S/MS)</p>
+        <p>Watch Time: </p>
+
+      </div>
+    </div>
+  
       {% endfor %}
+    </div>
+</div>
 </div>
 
+<script>
+  let totalTimeTracked = 0; // To store total time tracked
 
+  function trackVideoTime(video) {
+      video.addEventListener('timeupdate', function () {
+          if (video.currentTime >= video.duration) {
+              totalTimeTracked += video.duration; // Update the tracked time
+              console.log(`Total time tracked: ${totalTimeTracked} seconds`);
+
+              // Send tracked time to Django back-end
+              fetch('/track-time/', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'X-CSRFToken': '{{ csrf_token }}' // CSRF token for security
+                  },
+                  body: JSON.stringify({ time: totalTimeTracked }),
+              })
+              .then(response => response.json())
+              .then(data => console.log('Success:', data))
+              .catch((error) => console.error('Error:', error));
+
+              video.currentTime = 0; // Restart the video
+          }
+      });
+  }
+
+  window.onload = function () {
+      const videoElement = document.getElementById('myVideo');
+      trackVideoTime(videoElement);
+  };
+
+  document.getElementById('watchTime').innerText = `Watch Time: ${totalTimeTracked} seconds`;
+</script>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
