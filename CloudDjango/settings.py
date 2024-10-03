@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
-# coudinary imports
+# coudinary imports 
 import cloudinary_storage
 import cloudinary
 import cloudinary.uploader
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'cloudinary_storage',
     'api',
+    'VideosSave',
 ]
 
 MIDDLEWARE = [
@@ -63,7 +64,7 @@ ROOT_URLCONF = 'CloudDjango.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -134,5 +135,10 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+cloudinary.config(
+    cloud_name="dawyddsxt",
+    api_key="243457444378268",
+    api_secret="Pod4GfGZdNH4FrxeRPLpHJTbtlg",
+)
 # DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
